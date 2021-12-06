@@ -1,4 +1,4 @@
-def part_one(values):
+def part_one(data):
     return calculate_growth(data, 80)
 
 
@@ -15,11 +15,10 @@ def calculate_growth(data, days):
         zeroes = 0
         for i, f in enumerate(fish_by_age):
             if i == 0 and f > 0:
-                fish_by_age[i] = 0
                 zeroes = f
             else:
-                fish_by_age[i] = 0
                 fish_by_age[i-1] += f
+            fish_by_age[i] = 0
         fish_by_age[6] += zeroes
         fish_by_age[8] += zeroes
     return sum(fish_by_age)

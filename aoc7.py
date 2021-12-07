@@ -10,12 +10,11 @@ def part_two(data):
 
 
 def calculate_fuel(data, func):
-    fuels = [sum([func(d-i) for d in data]) for i in range(max(data)+1)]
+    fuels = [sum([func(abs(d-i)) for d in data]) for i in range(max(data)+1)]
     return min(fuels)
 
 
-def fuel_sum(diff):
-    n = abs(diff)
+def fuel_sum(n):
     return int((2+(n-1))*n/2)
 
 

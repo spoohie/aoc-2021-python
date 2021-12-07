@@ -1,6 +1,3 @@
-import sys
-
-
 def part_one(data):
     return calculate_fuel(data, abs)
 

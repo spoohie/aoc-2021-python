@@ -10,12 +10,8 @@ def part_two(data):
 
 
 def calculate_fuel(data, func):
-    current_fuel = sys.maxsize
-    for i in range(max(data)+1):
-        new_fuel = sum([func(d-i) for d in data])
-        if new_fuel < current_fuel:
-            current_fuel = new_fuel
-    return current_fuel
+    fuels = [sum([func(d-i) for d in data]) for i in range(max(data)+1)]
+    return min(fuels)
 
 
 def fuel_sum(diff):

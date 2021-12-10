@@ -7,7 +7,6 @@ def part_one(data):
         
 
 def step(data):
-    # flashed = { key: False for key in data.keys() }
     flashes = 0
     data = increment_data(data)
     for k, v in data.items():
@@ -23,7 +22,9 @@ def increment_data(data):
 
 
 def find_neighbours(node, data):
-    return [n for n in [(node[0]-1, node[1]), (node[0]+1, node[1]), (node[0]-1, node[1]-1), (node[0], node[1]-1), (node[0]+1, node[1]-1), (node[0]-1, node[1]+1), (node[0], node[1]+1), (node[0]+1, node[1]+1)] if n in data]
+    return [n for n in [(node[0]-1, node[1]-1), (node[0], node[1]-1), (node[0]+1, node[1]-1),
+                        (node[0]-1, node[1]),                         (node[0]+1, node[1]),
+                        (node[0]-1, node[1]+1), (node[0], node[1]+1), (node[0]+1, node[1]+1)] if n in data]
 
 
 def flash(node, neighbours, data, flashes=0):
@@ -39,10 +40,10 @@ def flash(node, neighbours, data, flashes=0):
 
 
 def part_two(data):
-    steps = 1
+    steps = 0
     while step(data) != len(data):
         steps += 1
-    return steps
+    return steps+1
 
 
 with open('input.txt', 'r') as f:

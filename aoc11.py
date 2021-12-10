@@ -1,5 +1,5 @@
 import copy
-from itertools import product
+from itertools import count, product
 
 
 def part_one(data):
@@ -40,10 +40,10 @@ def flash(node, neighbours, data, flashes=0):
 
 
 def part_two(data):
-    steps = 0
-    while step(data) != len(data):
-        steps += 1
-    return steps+1
+    for i in count():
+        if step(data) == len(data):
+            break
+    return i+1
 
 
 with open('input.txt', 'r') as f:

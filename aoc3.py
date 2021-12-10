@@ -8,8 +8,8 @@ def calculate_bit_chains(data):
     lcb = ""
     for i in range(LEN):
         s = [d[i] for d in data]
-        mcb = mcb + most_common(s)
-        lcb = lcb + least_common(s)
+        mcb += most_common(s)
+        lcb += least_common(s)
     return mcb, lcb
 
 

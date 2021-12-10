@@ -19,7 +19,7 @@ def part_one(data):
 
     for a, b in pairwise(data):
         if a < b:
-            val = val + 1
+            val += 1
     return val
 
 
@@ -28,7 +28,7 @@ def part_two(data):
 
     for a, b in pairwise(threes(data)):
         if sum(a) < sum(b):
-            val = val + 1
+            val += 1
     return val
 
 

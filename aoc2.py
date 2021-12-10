@@ -10,11 +10,11 @@ def part_one(moves):
 
     for m in moves:
         if m.dir == "forward":
-            hor = hor + m.val
+            hor += m.val
         if m.dir == "down":
-            depth = depth + m.val
+            depth += m.val
         if m.dir == "up":
-            depth = depth - m.val
+            depth -= m.val
     return hor*depth
 
 
@@ -25,12 +25,12 @@ def part_two(moves):
 
     for m in moves:
         if m.dir == "forward":
-            hor = hor + m.val
+            hor += m.val
             depth = depth + aim * m.val
         if m.dir == "down":
-            aim = aim + m.val
+            aim += m.val
         if m.dir == "up":
-            aim = aim - m.val
+            aim -= m.val
     return hor*depth
 
 

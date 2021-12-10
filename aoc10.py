@@ -15,10 +15,10 @@ def part_one(data):
 
 def find_corrupted(line):
     rev_brackets = {
-    ')': '(',
-    ']': '[',
-    '}': '{',
-    '>': '<'
+        ')': '(',
+        ']': '[',
+        '}': '{',
+        '>': '<'
     }
 
     stack = list()

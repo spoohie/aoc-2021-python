@@ -21,13 +21,13 @@ def find_corrupted(line):
     '>': '<'
     }
 
-    heap = list()
+    stack = list()
     for c in line:
         if c in rev_brackets.keys():
-            if heap.pop() != rev_brackets[c]:
+            if stack.pop() != rev_brackets[c]:
                 return c
         else:
-            heap.append(c)
+            stack.append(c)
 
 
 def part_two(data):

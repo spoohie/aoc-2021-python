@@ -21,26 +21,25 @@ def find_neighbours(node, depths):
 
 def part_two(depths):
     lowest = lowest_points(depths)
-    basin_sizes = [find_basin_size(depths, p) for p in lowest]
-    basin_sizes = sorted(basin_sizes, reverse=True)
+    basin_sizes = sorted([find_basin_size(node, depths) for node in lowest], reverse=True)
     return basin_sizes[0] * basin_sizes[1] * basin_sizes[2]
 
 
-def find_basin_size(depths, point):
+def find_basin_size(node, depths):
     basin = { key: False for key in depths.keys() }
-    _, size = dfs(depths, point, basin)
+    _, size = dfs(depths, node, basin)
     return size
 
 
-def dfs(graph, node, tree, size=0):
-    if not tree[node]:
-        tree[node] = True
-        if graph[node] < 9:
+def dfs(depths, node, basin, size=0):
+    if not basin[node]:
+        basin[node] = True
+        if depths[node] < 9:
             size += 1
-            neigbours = find_neighbours(node, graph)
+            neigbours = find_neighbours(node, depths)
             for n in neigbours:
-                tree, size = dfs(graph, n, tree, size)
-    return tree, size
+                basin, size = dfs(depths, n, basin, size)
+    return basin, size
 
 
 with open('input.txt', 'r') as f:

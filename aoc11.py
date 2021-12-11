@@ -7,36 +7,27 @@ def part_one(data):
         
 
 def step(data):
-    flashes = 0
-    data = increment_data(data)
-    for k, v in data.items():
-        if v > 9:
-            flashes += flash(k, find_neighbours(k, data), data)
-    return flashes
-
-
-def increment_data(data):
     for node in data:
         data[node] += 1
-    return data
+    return sum(flash(k, data) for k, v in data.items() if v > 9)
+
+
+def flash(node, data):
+    flashes = 1
+    data[node] = 0
+    for n in find_neighbours(node, data):
+        if data[n] == 0:
+            continue
+        data[n] += 1
+        if data[n] > 9:
+            flashes += flash(n, data)
+    return flashes
 
 
 def find_neighbours(node, data):
     return [n for n in [(node[0]-1, node[1]-1), (node[0], node[1]-1), (node[0]+1, node[1]-1),
                         (node[0]-1, node[1]),                         (node[0]+1, node[1]),
                         (node[0]-1, node[1]+1), (node[0], node[1]+1), (node[0]+1, node[1]+1)] if n in data]
-
-
-def flash(node, neighbours, data, flashes=0):
-    flashes += 1
-    data[node] = 0
-    for n in neighbours:
-        if data[n] == 0:
-            continue
-        data[n] += 1
-        if data[n] > 9:
-            flashes = flash(n, find_neighbours(n, data), data, flashes)
-    return flashes
 
 
 def part_two(data):

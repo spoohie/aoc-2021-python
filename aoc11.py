@@ -9,10 +9,12 @@ def part_one(data):
 def step(data):
     for node in data:
         data[node] += 1
-    return sum(flash(k, data) for k, v in data.items() if v > 9)
+    return sum(flash(k, data) for k in data)
 
 
 def flash(node, data):
+    if data[node] <= 9:
+        return 0
     flashes = 1
     data[node] = 0
     for n in find_neighbours(node, data):

@@ -39,7 +39,7 @@ def fold_vertically(data, index):
 def part_two(data, folds):
     data = fold(data, folds)
     for d in data:
-        print(d)
+        print("".join(d))
 
 
 with open('input.txt', 'r') as f:

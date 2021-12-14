@@ -1,31 +1,42 @@
-from collections import Counter
+from collections import defaultdict
+import time
+
 
 def part_one(template, rules):
-    for i in range(40):
-        template = apply_rules(template, rules)
-    lens = Counter(template).values()
+    lens = apply_rules(template, rules, 10)
     return max(lens) - min(lens)
 
 
-def apply_rules(template, rules):
-    new_formula = ""
+def part_two(template, rules):
+    lens = apply_rules(template, rules, 40)
+    return max(lens) - min(lens)
+
+
+def apply_rules(template, rules, times):
+    lens = defaultdict(int)
+    for l in template:
+        lens[l] += 1
+    pairs = defaultdict(int)
     template_pairs = [''.join(pair) for pair in zip(template[:-1], template[1:])]
-    if template_pairs[0] in rules:
-        new_formula += template_pairs[0][0] + rules[template_pairs[0]] + template_pairs[0][1]
-    else:
-        new_formula += template_pairs[0]
-    for p in template_pairs[1:]:
-        if p in rules:
-            new_formula += rules[p] + p[1]
-        else:
-            new_formula += p
-    return new_formula
+    for k in template_pairs:
+        pairs[k] += 1
+    for _ in range(times):
+        new_pairs = defaultdict(int)
+        for p in pairs:
+            if p in rules:
+                new_pairs[p[0]+rules[p]] += pairs[p]
+                new_pairs[rules[p]+p[1]] += pairs[p]
+                lens[rules[p]] += pairs[p]
+        pairs = new_pairs
+    return list(lens.values())
+    
 
-
+start_time = time.time()
 with open('input.txt', 'r') as f:
     template = f.readline().rstrip()
     f.readline() # omit whitespace
     rules = dict(s.rstrip().split(" -> ") for s in f)
 
 print(f"Part one solution: {part_one(template, rules)}")
-# print(f"Part two solution: {part_two(data)}")
+print(f"Part two solution: {part_two(template, rules)}")
+print("--- %s seconds ---" % (time.time() - start_time))

@@ -23,10 +23,9 @@ def apply_rules(template, rules, times):
     for _ in range(times):
         new_pairs = defaultdict(int)
         for p in pairs:
-            if p in rules:
-                new_pairs[p[0]+rules[p]] += pairs[p]
-                new_pairs[rules[p]+p[1]] += pairs[p]
-                lens[rules[p]] += pairs[p]
+            new_pairs[p[0]+rules[p]] += pairs[p]
+            new_pairs[rules[p]+p[1]] += pairs[p]
+            lens[rules[p]] += pairs[p]
         pairs = new_pairs
     return list(lens.values())
     
@@ -34,7 +33,7 @@ def apply_rules(template, rules, times):
 start_time = time.time()
 with open('input.txt', 'r') as f:
     template = f.readline().rstrip()
-    f.readline() # omit whitespace
+    f.readline() # omit empty line
     rules = dict(s.rstrip().split(" -> ") for s in f)
 
 print(f"Part one solution: {part_one(template, rules)}")

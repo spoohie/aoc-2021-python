@@ -78,18 +78,16 @@ def hextobin(data):
     return f'{integer:0>{len(data)*4}b}'
 
 
-def part_one(data):
-    p = Packet(data)
-    return p.version_sum()
+def part_one(packet):
+    return packet.version_sum()
 
-def part_two(data):
-    p = Packet(data)
-    return p.value()
+def part_two(packet):
+    return packet.value()
 
 
 with open('input.txt', 'r') as f:
     data = f.readline().rstrip()
-data = hextobin(data)
 
-print(f"Part one solution: {part_one(data)}")
-print(f"Part two solution: {part_two(data)}")
+p = Packet(hextobin(data))
+print(f"Part one solution: {part_one(p)}")
+print(f"Part two solution: {part_two(p)}")

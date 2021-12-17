@@ -31,7 +31,7 @@ class Packet:
             return self.__read_subpackets_by_number(data)
 
     def __read_subpackets_by_length(self, data):
-        length, data = int(data[:15], 2), data[15:]
+        length, data = self.__read(data, 15)
         subpackets_data, data = data[:length], data[length:]
         while subpackets_data:
             p = Packet(subpackets_data)
@@ -40,7 +40,7 @@ class Packet:
         return data
 
     def __read_subpackets_by_number(self, data):
-        num, data = int(data[:11], 2), data[11:]
+        num, data = self.__read(data, 11)
         for _ in range(num):
             p = Packet(data)
             self.body.append(p)
